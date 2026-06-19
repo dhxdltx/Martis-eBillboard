@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5">
+
+    <!-- 标题栏 -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp" />
+
+    <!-- 滚动内容 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- ============================================================ -->
+            <!-- 模块 1：网址设置 -->
+            <!-- ============================================================ -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/section_home_url"
+                android:textColor="@color/colorPrimary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:paddingBottom="6dp"
+                android:paddingTop="4dp" />
+
+            <androidx.cardview.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="8dp"
+                card_view:cardElevation="2dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hint_home_url"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:paddingBottom="8dp" />
+
+                    <EditText
+                        android:id="@+id/edit_home_url"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/placeholder_home_url"
+                        android:inputType="textUri"
+                        android:maxLines="1"
+                        android:textSize="15sp"
+                        android:background="@drawable/edit_text_bg"
+                        android:padding="10dp" />
+
+                    <Button
+                        android:id="@+id/btn_save_url"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/btn_save_url"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- ============================================================ -->
+            <!-- 模块 2：User-Agent 设置 -->
+            <!-- ============================================================ -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/section_user_agent"
+                android:textColor="@color/colorPrimary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:paddingBottom="6dp"
+                android:paddingTop="4dp" />
+
+            <androidx.cardview.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="8dp"
+                card_view:cardElevation="2dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_ua"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/radio_ua_default"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ua_default"
+                            android:textSize="14sp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp" />
+
+                        <RadioButton
+                            android:id="@+id/radio_ua_desktop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ua_desktop"
+                            android:textSize="14sp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp" />
+
+                        <RadioButton
+                            android:id="@+id/radio_ua_mobile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ua_mobile"
+                            android:textSize="14sp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp" />
+
+                        <RadioButton
+                            android:id="@+id/radio_ua_custom"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ua_custom"
+                            android:textSize="14sp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp" />
+
+                    </RadioGroup>
+
+                    <!-- 自定义 UA 输入区域 -->
+                    <LinearLayout
+                        android:id="@+id/layout_custom_ua"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <EditText
+                            android:id="@+id/edit_custom_ua"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hint_custom_ua"
+                            android:inputType="textMultiLine"
+                            android:minLines="2"
+                            android:maxLines="4"
+                            android:textSize="13sp"
+                            android:background="@drawable/edit_text_bg"
+                            android:padding="10dp"
+                            android:layout_marginTop="8dp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_save_ua"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/btn_save_ua"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- ============================================================ -->
+            <!-- 模块 3：应用管理 -->
+            <!-- ============================================================ -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/section_apps"
+                android:textColor="@color/colorPrimary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:paddingBottom="6dp"
+                android:paddingTop="4dp" />
+
+            <androidx.cardview.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="8dp"
+                card_view:cardElevation="2dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <Button
+                        android:id="@+id/btn_launch_apps"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_launch_apps"
+                        android:backgroundTint="@color/colorAccent"
+                        android:textColor="#FFFFFF"
+                        android:drawableLeft="@android:drawable/ic_menu_sort_by_size"
+                        android:drawablePadding="8dp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- ============================================================ -->
+            <!-- 模块 4：系统设置 -->
+            <!-- ============================================================ -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/section_system"
+                android:textColor="@color/colorPrimary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:paddingBottom="6dp"
+                android:paddingTop="4dp" />
+
+            <androidx.cardview.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="8dp"
+                card_view:cardElevation="2dp"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <Button
+                        android:id="@+id/btn_system_settings"
+                        style="@style/SettingButton"
+                        android:text="@string/btn_system_settings" />
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="#EEEEEE" android:layout_marginVertical="4dp"/>
+
+                    <Button
+                        android:id="@+id/btn_wifi_settings"
+                        style="@style/SettingButton"
+                        android:text="@string/btn_wifi_settings" />
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="#EEEEEE" android:layout_marginVertical="4dp"/>
+
+                    <Button
+                        android:id="@+id/btn_display_settings"
+                        style="@style/SettingButton"
+                        android:text="@string/btn_display_settings" />
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="#EEEEEE" android:layout_marginVertical="4dp"/>
+
+                    <Button
+                        android:id="@+id/btn_datetime_settings"
+                        style="@style/SettingButton"
+                        android:text="@string/btn_datetime_settings" />
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="#EEEEEE" android:layout_marginVertical="4dp"/>
+
+                    <Button
+                        android:id="@+id/btn_sound_settings"
+                        style="@style/SettingButton"
+                        android:text="@string/btn_sound_settings" />
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="#EEEEEE" android:layout_marginVertical="4dp"/>
+
+                    <Button
+                        android:id="@+id/btn_dev_options"
+                        style="@style/SettingButton"
+                        android:text="@string/btn_dev_options" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- ============================================================ -->
+            <!-- 模块 5：密码保护 -->
+            <!-- ============================================================ -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/section_password"
+                android:textColor="@color/colorPrimary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:paddingBottom="6dp"
+                android:paddingTop="4dp" />
+
+            <androidx.cardview.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="8dp"
+                card_view:cardElevation="2dp"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pwd_set_hint"
+                        android:textSize="13sp"
+                        android:textColor="#666666"
+                        android:paddingBottom="10dp" />
+
+                    <Button
+                        android:id="@+id/btn_change_pwd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_change_pwd"
+                        android:backgroundTint="@color/colorAccent"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

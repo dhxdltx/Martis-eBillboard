@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebView Launcher — Android 项目说明</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+         background: #F0F4F8; color: #2D3748; line-height: 1.6; }
+  header { background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
+           color: #fff; padding: 32px 24px; }
+  header h1 { font-size: 26px; margin-bottom: 6px; }
+  header p { opacity: .85; font-size: 14px; }
+  .badge { display: inline-block; background: rgba(255,255,255,.2);
+           border-radius: 12px; padding: 2px 10px; font-size: 12px; margin: 4px 2px; }
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 16px; }
+
+  /* Sections */
+  section { background: #fff; border-radius: 12px; padding: 20px 24px;
+            margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+  section h2 { font-size: 16px; color: #1565C0; margin-bottom: 14px;
+               border-left: 4px solid #1565C0; padding-left: 10px; }
+
+  /* Feature grid */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .card { background: #F7FAFC; border: 1px solid #E2E8F0; border-radius: 8px;
+          padding: 14px; }
+  .card .icon { font-size: 24px; margin-bottom: 6px; }
+  .card h3 { font-size: 14px; font-weight: 600; color: #2D3748; margin-bottom: 4px; }
+  .card p { font-size: 12px; color: #718096; }
+
+  /* File tree */
+  .tree { font-family: 'Courier New', monospace; font-size: 13px; background: #1A202C;
+          color: #A0AEC0; border-radius: 8px; padding: 16px; overflow-x: auto; }
+  .tree .dir { color: #63B3ED; }
+  .tree .java { color: #68D391; }
+  .tree .xml { color: #FBD38D; }
+  .tree .gradle { color: #FC8181; }
+
+  /* Steps */
+  .steps { counter-reset: step; }
+  .step { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+  .step::before { counter-increment: step; content: counter(step);
+                  min-width: 28px; height: 28px; background: #1565C0; color: #fff;
+                  border-radius: 50%; display: flex; align-items: center;
+                  justify-content: center; font-size: 13px; font-weight: bold; flex-shrink: 0; }
+  .step div { padding-top: 4px; }
+  .step h3 { font-size: 14px; margin-bottom: 3px; }
+  .step p { font-size: 13px; color: #718096; }
+
+  /* Code block */
+  pre { background: #2D3748; color: #E2E8F0; border-radius: 6px; padding: 12px 16px;
+        overflow-x: auto; font-size: 12px; line-height: 1.7; margin-top: 8px; }
+  code { font-family: 'Courier New', monospace; }
+
+  /* Compat table */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: #EBF4FF; color: #2B6CB0; padding: 8px 12px; text-align: left; }
+  td { padding: 8px 12px; border-bottom: 1px solid #E2E8F0; }
+  tr:hover td { background: #F7FAFC; }
+  .yes { color: #38A169; font-weight: bold; }
+  .no { color: #E53E3E; }
+
+  /* Tip */
+  .tip { background: #FFFAF0; border-left: 4px solid #DD6B20; border-radius: 4px;
+         padding: 10px 14px; font-size: 13px; color: #7B341E; margin-top: 8px; }
+  .info { background: #EBF8FF; border-left: 4px solid #2B6CB0; border-radius: 4px;
+          padding: 10px 14px; font-size: 13px; color: #2C5282; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📱 WebView Launcher</h1>
+  <p>Android WebView 全屏浏览器启动器 · 可作为系统默认桌面</p>
+  <div style="margin-top:12px">
+    <span class="badge">Android 4.0+</span>
+    <span class="badge">API 14+</span>
+    <span class="badge">Java</span>
+    <span class="badge">全屏 WebView</span>
+    <span class="badge">自定义 UA</span>
+    <span class="badge">启动器</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- 功能概览 -->
+  <section>
+    <h2>✨ 功能概览</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="icon">🌐</div>
+        <h3>全屏 WebView</h3>
+        <p>启动即全屏加载指定网站，无状态栏/导航栏遮挡，沉浸式体验</p>
+      </div>
+      <div class="card">
+        <div class="icon">🏠</div>
+        <h3>系统启动器</h3>
+        <p>可设为默认桌面（HOME），替代 Android 原生桌面</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔄</div>
+        <h3>UA 切换</h3>
+        <p>支持系统默认 / 桌面Chrome / 移动Chrome / 完全自定义四种 UA 模式</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔗</div>
+        <h3>自定义主页</h3>
+        <p>在设置中随时修改自动加载的网址，立即生效</p>
+      </div>
+      <div class="card">
+        <div class="icon">📦</div>
+        <h3>应用启动器</h3>
+        <p>内置应用列表，可搜索并一键启动设备上的任意应用</p>
+      </div>
+      <div class="card">
+        <div class="icon">⚙️</div>
+        <h3>系统设置直达</h3>
+        <p>一键跳转 Wi-Fi、显示、声音、日期时间、开发者选项等</p>
+      </div>
+      <div class="card">
+        <div class="icon">📥</div>
+        <h3>文件下载</h3>
+        <p>点击下载链接自动调起系统浏览器或下载器处理</p>
+      </div>
+      <div class="card">
+        <div class="icon">🎬</div>
+        <h3>全屏视频</h3>
+        <p>支持 HTML5 视频全屏播放，自动旋转屏幕方向</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 项目结构 -->
+  <section>
+    <h2>📂 项目文件结构</h2>
+    <div class="tree">
+<pre><code><span class="dir">WebViewLauncher/</span>
+├── <span class="gradle">build.gradle</span>               ← 根 Gradle 配置
+├── <span class="gradle">settings.gradle</span>            ← 项目设置
+├── <span class="gradle">gradle.properties</span>          ← AndroidX 开关
+├── gradle/wrapper/
+│   └── <span class="gradle">gradle-wrapper.properties</span>  ← Gradle 7.5
+└── <span class="dir">app/</span>
+    ├── <span class="gradle">build.gradle</span>           ← minSdk=14, targetSdk=33
+    ├── proguard-rules.pro
+    └── <span class="dir">src/main/</span>
+        ├── <span class="xml">AndroidManifest.xml</span>    ← HOME 启动器 + 权限
+        ├── <span class="dir">java/com/launcher/webview/</span>
+        │   ├── <span class="java">MainActivity.java</span>      ← 全屏 WebView 核心
+        │   ├── <span class="java">SettingsActivity.java</span>  ← 设置页面
+        │   ├── <span class="java">AppListActivity.java</span>   ← 应用列表
+        │   └── <span class="java">Constants.java</span>         ← 全局常量/UA预设
+        └── <span class="dir">res/</span>
+            ├── <span class="dir">layout/</span>
+            │   ├── <span class="xml">activity_main.xml</span>      ← 全屏 WebView 布局
+            │   ├── <span class="xml">activity_settings.xml</span>  ← 设置界面
+            │   ├── <span class="xml">activity_app_list.xml</span>  ← 应用列表界面
+            │   └── <span class="xml">item_app.xml</span>           ← 应用列表行
+            ├── <span class="dir">menu/</span>
+            │   └── <span class="xml">menu_main.xml</span>          ← 主界面菜单
+            └── <span class="dir">values/</span>
+                ├── <span class="xml">strings.xml</span>            ← 所有文本（中文）
+                ├── <span class="xml">colors.xml</span>             ← 颜色定义
+                └── <span class="xml">styles.xml</span>             ← 主题/样式</code></pre>
+    </div>
+  </section>
+
+  <!-- 构建说明 -->
+  <section>
+    <h2>🔨 如何构建 APK</h2>
+    <div class="steps">
+      <div class="step">
+        <div>
+          <h3>安装 Android Studio</h3>
+          <p>下载 Android Studio（免费）并安装 SDK，选择 API 14~33 的组件。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>导入项目</h3>
+          <p>打开 Android Studio → File → Open → 选择 <code>WebViewLauncher</code> 文件夹</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>等待 Gradle 同步</h3>
+          <p>首次同步会自动下载依赖，需要网络连接，约 1~5 分钟。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>构建 Debug APK</h3>
+          <p>菜单 Build → Build Bundle(s) / APK(s) → Build APK(s)，完成后点击 "locate" 定位 APK 文件。</p>
+          <pre><code># 或者命令行构建（需要配置好 JAVA_HOME 和 Android SDK）
+./gradlew assembleDebug
+# APK 位置：app/build/outputs/apk/debug/app-debug.apk</code></pre>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>安装到设备</h3>
+          <p>启用开发者选项 → USB 调试，连接手机后执行：</p>
+          <pre><code>adb install app/build/outputs/apk/debug/app-debug.apk</code></pre>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>设置为默认启动器（可选）</h3>
+          <p>在系统提示"选择默认桌面应用"时，选择 <strong>WebView Launcher</strong> 并点击"始终"。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 兼容性 -->
+  <section>
+    <h2>📊 Android 版本兼容性</h2>
+    <table>
+      <tr>
+        <th>Android 版本</th>
+        <th>API Level</th>
+        <th>WebView</th>
+        <th>全屏</th>
+        <th>混合内容</th>
+        <th>文件选择</th>
+      </tr>
+      <tr>
+        <td>4.0 Ice Cream Sandwich</td><td>14~15</td>
+        <td class="yes">✓</td><td class="yes">✓</td>
+        <td class="yes">✓（http/https）</td><td class="no">✗</td>
+      </tr>
+      <tr>
+        <td>4.1~4.3 Jelly Bean</td><td>16~18</td>
+        <td class="yes">✓</td><td class="yes">✓</td>
+        <td class="yes">✓</td><td class="no">✗</td>
+      </tr>
+      <tr>
+        <td>4.4 KitKat</td><td>19</td>
+        <td class="yes">✓（Chromium）</td><td class="yes">✓</td>
+        <td class="yes">✓</td><td class="no">✗</td>
+      </tr>
+      <tr>
+        <td>5.0~5.1 Lollipop</td><td>21~22</td>
+        <td class="yes">✓（可更新）</td><td class="yes">✓</td>
+        <td class="yes">✓</td><td class="yes">✓</td>
+      </tr>
+      <tr>
+        <td>6.0+ Marshmallow~</td><td>23+</td>
+        <td class="yes">✓</td><td class="yes">✓</td>
+        <td class="yes">✓</td><td class="yes">✓</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 使用提示 -->
+  <section>
+    <h2>💡 使用提示</h2>
+    <div class="info">
+      <strong>返回键操作：</strong>在主界面按返回键会弹出快捷菜单（刷新 / 主页 / 设置 / 退出），不会直接退出应用。网页有历史记录时，返回键会先导航到上一页。
+    </div>
+    <div class="info" style="margin-top:10px">
+      <strong>进入设置：</strong>长按 WebView 空白区域 → 点击菜单按钮（右上角三点）→ 设置；或在返回键弹窗中选择"设置"。
+    </div>
+    <div class="tip">
+      <strong>注意：</strong>如果目标网站使用 HTTP（非 HTTPS），已在 AndroidManifest.xml 中开启 <code>android:usesCleartextTraffic="true"</code>，以确保 Android 9+ 也能正常加载 HTTP 页面。如果安全性要求高，可将此项改为 false。
+    </div>
+    <div class="tip" style="margin-top:10px">
+      <strong>自定义图标：</strong>将 PNG 格式的图标文件分别放入 <code>res/mipmap-mdpi</code>（48×48）、<code>hdpi</code>（72×72）、<code>xhdpi</code>（96×96）、<code>xxhdpi</code>（144×144）目录，命名为 <code>ic_launcher.png</code>。
+    </div>
+  </section>
+
+</div>
+
+<footer style="text-align:center;padding:20px;color:#A0AEC0;font-size:12px">
+  WebView Launcher · Android 4.0+ · 使用 Java + AndroidX 构建
+</footer>
+</body>
+</html>

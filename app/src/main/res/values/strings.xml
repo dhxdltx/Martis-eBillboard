@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">eBillboard</string>
+    <string name="title_settings">设置</string>
+    <string name="title_app_list">所有应用</string>
+
+    <!-- 网址设置 -->
+    <string name="section_home_url">自动加载网址</string>
+    <string name="hint_home_url">输入要自动加载的网址</string>
+    <string name="placeholder_home_url">https://www.example.com</string>
+    <string name="btn_save_url">保存网址</string>
+
+    <!-- UA 设置 -->
+    <string name="section_user_agent">浏览器 User-Agent</string>
+    <string name="ua_default">系统默认（Android WebView）</string>
+    <string name="ua_desktop">桌面端 Chrome（Windows）</string>
+    <string name="ua_mobile">移动端 Chrome（Android）</string>
+    <string name="ua_custom">自定义 UA</string>
+    <string name="hint_custom_ua">输入自定义 User-Agent 字符串…</string>
+    <string name="btn_save_ua">保存 UA 设置</string>
+
+    <!-- 应用管理 -->
+    <string name="section_apps">应用启动</string>
+    <string name="btn_launch_apps">浏览并启动其他应用</string>
+    <string name="hint_search_app">搜索应用名称或包名…</string>
+
+    <!-- 系统设置 -->
+    <string name="section_system">设置</string>
+    <string name="btn_system_settings">通用系统设置</string>
+    <string name="btn_wifi_settings">Wi-Fi 设置</string>
+    <string name="btn_display_settings">显示设置</string>
+    <string name="btn_datetime_settings">日期和时间</string>
+    <string name="btn_sound_settings">声音设置</string>
+    <string name="btn_dev_options">开发者选项</string>
+
+    <!-- 菜单 -->
+    <string name="action_refresh">刷新</string>
+    <string name="action_go_home">主页</string>
+    <string name="action_exit">退出</string>
+
+    <!-- 对话框 -->
+    <string name="dialog_exit_title">操作</string>
+
+    <!-- 消息 -->
+    <string name="msg_saved">已保存</string>
+    <string name="msg_no_browser">无法打开链接</string>
+    <string name="msg_launch_failed">无法启动 %s</string>
+    <string name="msg_settings_unavailable">此设置页面在当前设备上不可用</string>
+
+    <!-- 错误 -->
+    <string name="error_url_empty">网址不能为空</string>
+    <string name="error_ua_empty">UA 字符串不能为空</string>
+
+    <!-- 密码保护 -->
+    <string name="pwd_title">输入密码</string>
+    <string name="pwd_hint">请输入密码以进入设置，初始密码123</string>
+    <string name="pwd_hint_input">请输入密码</string>
+    <string name="pwd_error">密码错误，请重试</string>
+    <string name="pwd_set_title">设置新密码</string>
+    <string name="pwd_set_hint">请在此处修改设置密码</string>
+    <string name="pwd_hint_new">新密码</string>
+    <string name="pwd_confirm_hint">再次确认新密码</string>
+    <string name="pwd_hint_confirm">再次确认新密码</string>
+    <string name="pwd_success">密码已更新</string>
+    <string name="pwd_mismatch">两次密码不一致</string>
+    <string name="pwd_empty">密码不能为空</string>
+    <string name="pwd_too_short">密码至少 3 位数字</string>
+    <string name="section_password">密码保护</string>
+    <string name="btn_change_pwd">修改设置密码</string>
+</resources>
